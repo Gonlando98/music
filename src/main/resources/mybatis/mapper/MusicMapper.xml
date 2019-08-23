@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lanqiao.mapper.MusicMapper">
+  <resultMap id="BaseResultMap" type="com.lanqiao.model.Music">
+    <id column="mid" jdbcType="INTEGER" property="mid" />
+    <result column="mname" jdbcType="VARCHAR" property="mname" />
+    <result column="sid" jdbcType="INTEGER" property="sid" />
+    <result column="count" jdbcType="INTEGER" property="count" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="myear" jdbcType="DATE" property="myear" />
+    <result column="mimg" jdbcType="VARCHAR" property="mimg" />
+    <result column="location" jdbcType="VARCHAR" property="location" />
+    <result column="aid" jdbcType="INTEGER" property="aid" />
+    <result column="mvid" jdbcType="INTEGER" property="mvid" />
+    <result column="duration" jdbcType="VARCHAR" property="duration" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="discuss" jdbcType="VARCHAR" property="discuss" />
+    <result column="mreserve1" jdbcType="VARCHAR" property="mreserve1" />
+    <result column="mreserve2" jdbcType="VARCHAR" property="mreserve2" />
+    <result column="mreserve3" jdbcType="VARCHAR" property="mreserve3" />
+    <association property="singer" javaType="com.lanqiao.model.Singer" resultMap="BaseResultMap2" />
+  </resultMap>
+  
+  <resultMap id="BaseResultMap2" type="com.lanqiao.model.Singer">
+    <id column="sid" jdbcType="INTEGER" property="sid" />
+    <result column="sname" jdbcType="VARCHAR" property="sname" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="simg" jdbcType="VARCHAR" property="simg" />
+    <result column="detail" jdbcType="VARCHAR" property="detail" />
+    <result column="sreserve" jdbcType="VARCHAR" property="sreserve" />
+    <result column="sreserve2" jdbcType="VARCHAR" property="sreserve2" />
+    
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from music
+    where mid = #{mid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteMusicBySid" parameterType="java.lang.Integer">
+    delete from music
+    where Sid = #{mid,jdbcType=INTEGER}
+  </delete>
+  <!-- <insert id="insert" parameterType="com.lanqiao.model.Music">
+    insert into music (mid, mname, sid, 
+      count, type, myear, mimg, 
+      location, aid, mvid, 
+      duration, state, discuss, 
+      mreserve1, mreserve2, mreserve3
+      )
+    values (#{mid,jdbcType=INTEGER}, #{mname,jdbcType=VARCHAR}, #{sid,jdbcType=INTEGER}, 
+      #{count,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{myear,jdbcType=DATE}, #{mimg,jdbcType=VARCHAR}, 
+      #{location,jdbcType=VARCHAR}, #{aid,jdbcType=INTEGER}, #{mvid,jdbcType=INTEGER}, 
+      #{duration,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, #{discuss,jdbcType=VARCHAR}, 
+      #{mreserve1,jdbcType=VARCHAR}, #{mreserve2,jdbcType=VARCHAR}, #{mreserve3,jdbcType=VARCHAR}
+      )
+  </insert> -->
+  <insert id="insert" parameterType="com.lanqiao.model.Music">
+    insert into music (mname, sid, 
+       type, myear, mimg, 
+      location, 
+      duration
+    
+      )
+    values ( #{mname,jdbcType=VARCHAR}, #{sid,jdbcType=INTEGER}, 
+       #{type,jdbcType=VARCHAR}, #{myear,jdbcType=DATE}, #{mimg,jdbcType=VARCHAR}, 
+      #{location,jdbcType=VARCHAR}, #{duration,jdbcType=VARCHAR} )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.lanqiao.model.Music">
+    update music
+    set mname = #{mname,jdbcType=VARCHAR},
+      sid = #{sid,jdbcType=INTEGER},
+      count = #{count,jdbcType=INTEGER},
+      type = #{type,jdbcType=VARCHAR},
+      myear = #{myear,jdbcType=DATE},
+      mimg = #{mimg,jdbcType=VARCHAR},
+      location = #{location,jdbcType=VARCHAR},
+      aid = #{aid,jdbcType=INTEGER},
+      mvid = #{mvid,jdbcType=INTEGER},
+      duration = #{duration,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      discuss = #{discuss,jdbcType=VARCHAR},
+      mreserve1 = #{mreserve1,jdbcType=VARCHAR},
+      mreserve2 = #{mreserve2,jdbcType=VARCHAR},
+      mreserve3 = #{mreserve3,jdbcType=VARCHAR}
+    where mid = #{mid,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select mid, mname, sid, count, type, myear, mimg, location, aid, mvid, duration, 
+    state, discuss, mreserve1, mreserve2, mreserve3
+    from music
+    where mid = #{mid,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select mid, mname, sid, count, type, myear, mimg, location, aid, mvid, duration, 
+    state, discuss, mreserve1, mreserve2, mreserve3
+    from music 
+
+  </select>
+  
+ 
+   <select id="selectAllMusic" resultMap="BaseResultMap">
+    <!-- select m.mname,s.sname,m.duration from music m ,singer s where m.sid=s.sid -->
+    select m.mid,m.type, m.count, m.mname,m.myear,s.sname,m.duration from music m ,singer s where m.sid=s.sid 
+  </select>
+	<select id="selectlist" resultMap="BaseResultMap">
+    select m.count, m.mname,s.sname,m.duration,m.mimg from music m ,singer s where m.sid=s.sid order by count desc
+
+  </select>
+  <select id="selectHotList" resultMap="BaseResultMap">
+    select m.count,m.myear, m.mname,s.sname,m.duration from music m ,singer s where m.sid=s.sid order by myear desc,count desc
+  </select>
+  <select id="selectPopList" resultMap="BaseResultMap">
+    select m.count,m.mname,s.sname,m.duration from music m ,singer s where m.sid=s.sid and m.type='流行' order by count desc
+  </select>
+  <select id="selectLoadList" resultMap="BaseResultMap">
+  	select m.count,m.mname,s.sname,m.duration from music m ,singer s where m.sid=s.sid and s.type='内地' order by count desc
+  </select>
+  <select id="selectRthkList" resultMap="BaseResultMap">
+    select m.count,m.mname,s.sname,m.duration from music m ,singer s where m.sid=s.sid and s.type='港台' order by count desc
+  </select>
+  <select id="selectEurUsaList" resultMap="BaseResultMap">
+    select m.count,m.mname,s.sname,m.duration from music m ,singer s where m.sid=s.sid and s.type='欧美' order by count desc
+  </select>
+  <select id="selectfpub" resultMap="BaseResultMap" parameterType="com.lanqiao.model.Singer">
+    select m.count,m.myear, m.mname,s.sname,m.duration,m.mimg,s.type from music m ,singer s 
+	where m.sid=s.sid and s.type =#{type ,jdbcType=VARCHAR} order by myear desc,count desc limit 0,6
+
+  </select>
+  <select id="selectMusicCountBysid" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select count(*) musicCount from music where sid=#{sid,jdbcType=INTEGER}
+  </select>
+  <select id="selectMusicBysid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select mid, mname, sid, count, type, myear, mimg, location, aid, mvid, duration, 
+    state, discuss, mreserve1, mreserve2, mreserve3 musicCount from music where music.sid=#{mid,jdbcType=INTEGER}
+  </select>
+</mapper>

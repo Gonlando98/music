@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lanqiao.mapper.SingerMapper">
+  <resultMap id="BaseResultMap" type="com.lanqiao.model.Singer">
+    <id column="sid" jdbcType="INTEGER" property="sid" />
+    <result column="sname" jdbcType="VARCHAR" property="sname" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="simg" jdbcType="VARCHAR" property="simg" />
+    <result column="detail" jdbcType="VARCHAR" property="detail" />
+    <result column="sreserve" jdbcType="VARCHAR" property="sreserve" />
+    <result column="sreserve2" jdbcType="VARCHAR" property="sreserve2" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from singer
+    where sid = #{sid,jdbcType=INTEGER}
+  </delete>
+ <!--  <insert id="insert" parameterType="com.lanqiao.model.Singer">
+    insert into singer (sid, sname, sex, 
+      type, simg, detail, 
+      sreserve, sreserve2)
+    values (#{sid,jdbcType=INTEGER}, #{sname,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{simg,jdbcType=VARCHAR}, #{detail,jdbcType=VARCHAR}, 
+      #{sreserve,jdbcType=VARCHAR}, #{sreserve2,jdbcType=VARCHAR})
+  </insert> -->
+   <insert id="insert" parameterType="com.lanqiao.model.Singer">
+    insert into singer (sid, sname, sex, 
+      type, simg, detail, 
+      sreserve, sreserve2)
+    values (#{sid,jdbcType=INTEGER}, #{sname,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{simg,jdbcType=VARCHAR}, #{detail,jdbcType=VARCHAR}, 
+      #{sreserve,jdbcType=VARCHAR},null)
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="Singer">
+    update singer
+    set sname = #{sname,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+    <!--   simg = #{simg,jdbcType=VARCHAR}, -->
+      detail = #{detail,jdbcType=VARCHAR},
+      sreserve = #{sreserve,jdbcType=VARCHAR}
+      <!-- sreserve2 = #{sreserve2,jdbcType=VARCHAR} --> 
+    where sid = #{sid,jdbcType=INTEGER}
+  </update> 
+<!--    <update id="updateByPrimaryKey" parameterType="com.lanqiao.model.Singer">
+    update singer
+   	
+       <set> 
+             <if test="sname != null">
+                 sname = #{sname,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                sex = #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                 type = #{type,jdbcType=VARCHAR},
+            </if>
+			<if test="simg != null">
+                 simg = #{simg,jdbcType=VARCHAR},
+            </if>
+			<if test="detail != null">
+                 detail = #{detail,jdbcType=VARCHAR}
+            </if>
+			<if test="sreserve != null">
+                 sreserve = #{sreserve,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where sid = #{sid,jdbcType=INTEGER}
+    
+    
+  </update> -->
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select sid, sname, sex, type, simg, detail, sreserve, sreserve2
+    from singer
+    where sid = #{sid,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select sid, sname, sex, type, simg, detail, sreserve, sreserve2
+    from singer
+  </select>
+  <select id="selectAllByFw" resultMap="BaseResultMap">
+    select sid, sname, sex, type, simg, detail, sreserve, sreserve2
+    from singer
+    where sreserve=#{sreserve,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByType" resultMap="BaseResultMap">
+    select sid, sname, sex, type, simg, detail, sreserve, sreserve2
+    from singer
+    where type=#{a,jdbcType=VARCHAR} and sex=#{b,jdbcType=VARCHAR}
+  </select>
+</mapper>

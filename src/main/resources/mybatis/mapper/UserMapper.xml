@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lanqiao.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.lanqiao.model.User">
+    <id column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+
+
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+
+    <result column="usertype" jdbcType="VARCHAR" property="usertype" />
+    <result column="userstatus" jdbcType="VARCHAR" property="userstatus" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where uid = #{uid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lanqiao.model.User">
+    insert into user (uid, username, password, 
+      email, createtime, usertype, 
+      userstatus)
+    values (#{uid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+  #{email,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{usertype,jdbcType=VARCHAR}, 
+  #{userstatus,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.lanqiao.model.User">
+    update user
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+
+
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      usertype = #{usertype,jdbcType=VARCHAR},
+      userstatus = #{userstatus,jdbcType=VARCHAR}
+    where uid = #{uid,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select uid, username, password, email, createtime, usertype, userstatus
+    from user
+    where uid = #{uid,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select uid, username, password, email, createtime, usertype, userstatus
+    from user
+  </select>
+  <update id="updateStatus" parameterType="com.lanqiao.model.User">
+    update user
+    set 
+      userstatus = #{userstatus,jdbcType=VARCHAR}
+    where uid = #{uid,jdbcType=INTEGER}
+  </update>
+</mapper>
