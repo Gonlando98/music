@@ -24,5 +24,10 @@ public class AdminAServiceImpl implements AdminAService {
 		// TODO Auto-generated method stub
 		return albumMapper.deleteByPrimaryKey(aid);
 	}
+	@Override
+	public Album selectAlbumById(Integer aid) {
+		// TODO Auto-generated method stub
+		return albumMapper.selectByPrimaryKey(aid);
+	}
 
 }
