@@ -28,7 +28,7 @@ public class AllowOriginFilter implements Filter {
 		response.setHeader("Access-Control-Allow-Methods", "POST,GET,PUT,DELETE");
 		response.setHeader("Access-Control-Max-Age", "3600");
 		response.setHeader("Access-Control-Allow-Headers", "Content-Type,XFILENAME,XFILECATEGORY,XFILESIZE");
-		System.out.println("+++++++++++++++++过滤器被使用+++++++++++++++++");
+		/*System.out.println("+++++++++++++++++过滤器被使用+++++++++++++++++");*/
 		chain.doFilter(req,response);
 		
 	}

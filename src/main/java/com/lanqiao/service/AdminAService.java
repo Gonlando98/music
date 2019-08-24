@@ -10,4 +10,6 @@ public interface AdminAService {
 
 	int deleteByPrimaryKey(Integer aid);
 
+	Album selectAlbumById(Integer aid);
+
 }
