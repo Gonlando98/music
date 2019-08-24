@@ -1,6 +1,8 @@
 package com.lanqiao.mapper;
 
 import com.lanqiao.model.Album;
+import com.lanqiao.model.Singer;
+
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -19,4 +21,8 @@ public interface AlbumMapper {
     int updateByPrimaryKey(Album record);
 
 	List<Album> selectAllAlbum();
+	
+	List<Album> selectAlbumByMid(Integer mid);
+	
+	Singer selectSingerByAid(Integer aid);
 }

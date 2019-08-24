@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lanqiao.model.Album;
 import com.lanqiao.model.Music;
 import com.lanqiao.model.Singer;
 import com.lanqiao.service.IAlbumService;
@@ -88,4 +89,39 @@ public class SingerController {
 		return service3.selectMusicBysid(sid);
 		
 	}
+	
+	@PostMapping("/singerAlbum")
+	public List<Album> selectAlbumByMid(Integer mid){
+		
+		
+		return service2.selectAlbumByMid(mid);
+		
+	}
+	
+	@PostMapping("/albumMusic")
+	public List<Music> selectMusicByAid(Integer aid){
+		
+		return service3.selectMusicByAid(aid);
+		
+	}
+	@PostMapping("/album")
+	public Album selectMusicByAid2(Integer aid){
+		
+		
+		return service2.selectByPrimaryKey(aid);
+		
+	}
+	@PostMapping("/albumSinger")
+	public Singer selectSingerByAid(Integer aid){
+		
+		return service2.selectSingerByAid(aid);
+		
+	}
+	@GetMapping("/allAlbums")
+	public List<Album> selectAll(){
+		
+		return service2.selectAll();
+		
+	}
+	
 }

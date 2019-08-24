@@ -53,11 +53,20 @@
   </select>
 
   <select id="selectCountBySid" parameterType="java.lang.Integer" resultType="java.lang.Integer">
-     select count(*) albumCount from album where sid=#{sid,jdbcType=INTEGER}
+     select count(*) albumCount from album where mid=#{sid,jdbcType=INTEGER}
  </select>
    <select id="selectAllAlbum" resultMap="BaseResultMap">
     select aid, aname, aimg, mid, adetail,s.sname
     from album a,singer s
     where a.mid = s.sid
   </select>
+  
+  <select id="selectAlbumByMid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+     select aid, aname, aimg, mid, adetail, areserve2 from album where mid=#{mid,jdbcType=INTEGER}
+ </select>
+ 
+ <select id="selectSingerByAid" parameterType="java.lang.Integer" resultMap="BaseResultMap2">
+     select sid, sname, sex, type, simg, detail, sreserve, sreserve2 from singer where sid=(select mid from album where aid=#{aid,jdbcType=INTEGER})
+ </select>
+ 
 </mapper>

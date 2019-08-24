@@ -94,9 +94,13 @@
     select mid, mname, sid, count, type, myear, mimg, location, aid, mvid, duration, 
     state, discuss, mreserve1, mreserve2, mreserve3
     from music 
-
   </select>
-  
+  <select id="selectMusicByAid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select mid, mname, sid, count, type, myear, mimg, location, aid, mvid, duration, 
+    state, discuss, mreserve1, mreserve2, mreserve3
+    from music
+    where aid = #{aid,jdbcType=INTEGER}
+  </select>
  
    <select id="selectAllMusic" resultMap="BaseResultMap">
     <!-- select m.mname,s.sname,m.duration from music m ,singer s where m.sid=s.sid -->

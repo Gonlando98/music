@@ -9,4 +9,6 @@ public interface IMusicService {
 	public int selectMusicCountBysid(Integer sid);
 	
 	public List<Music> selectMusicBysid(Integer sid);
+	
+	List<Music> selectMusicByAid(Integer aid);
 }

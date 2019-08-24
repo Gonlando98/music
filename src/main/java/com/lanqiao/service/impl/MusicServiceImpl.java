@@ -22,5 +22,10 @@ public class MusicServiceImpl implements IMusicService {
 		// TODO Auto-generated method stub
 		return mapper.selectMusicBysid(sid);
 	}
+	@Override
+	public List<Music> selectMusicByAid(Integer aid) {
+		// TODO Auto-generated method stub
+		return mapper.selectMusicByAid(aid);
+	}
 
 }
