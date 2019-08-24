@@ -28,4 +28,6 @@ public interface MvMapper {
 
 	List<Mv> selectStypemv(String type);
 
+	List<Mv> mvList();
+
 }

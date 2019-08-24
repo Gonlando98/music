@@ -42,6 +42,14 @@
     from user
     where uid = #{uid,jdbcType=INTEGER}
   </select>
+  
+<!--   条件查询 -->
+<!--   <select id="selectUserByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select uid, username, password, email, createtime, usertype, userstatus
+    from user
+    where username = #{username,jdbcType=String}
+  </select> -->
+  
   <select id="selectAll" resultMap="BaseResultMap">
     select uid, username, password, email, createtime, usertype, userstatus
     from user

@@ -38,7 +38,7 @@
   </delete>
   <delete id="deleteMusicBySid" parameterType="java.lang.Integer">
     delete from music
-    where Sid = #{mid,jdbcType=INTEGER}
+    where sid = #{sid,jdbcType=INTEGER}
   </delete>
   <!-- <insert id="insert" parameterType="com.lanqiao.model.Music">
     insert into music (mid, mname, sid, 
@@ -69,19 +69,15 @@
     update music
     set mname = #{mname,jdbcType=VARCHAR},
       sid = #{sid,jdbcType=INTEGER},
-      count = #{count,jdbcType=INTEGER},
+     
       type = #{type,jdbcType=VARCHAR},
       myear = #{myear,jdbcType=DATE},
-      mimg = #{mimg,jdbcType=VARCHAR},
+     
       location = #{location,jdbcType=VARCHAR},
       aid = #{aid,jdbcType=INTEGER},
       mvid = #{mvid,jdbcType=INTEGER},
-      duration = #{duration,jdbcType=VARCHAR},
-      state = #{state,jdbcType=INTEGER},
-      discuss = #{discuss,jdbcType=VARCHAR},
-      mreserve1 = #{mreserve1,jdbcType=VARCHAR},
-      mreserve2 = #{mreserve2,jdbcType=VARCHAR},
-      mreserve3 = #{mreserve3,jdbcType=VARCHAR}
+      duration = #{duration,jdbcType=VARCHAR}
+
     where mid = #{mid,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -97,11 +93,18 @@
 
   </select>
   
+<!--   搜索框 -->
+     <select id="selectMusicByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+      select m.mid,m.type, m.count, m.mname,m.myear,s.sname,m.duration
+ from music m ,singer s where m.sid=s.sid  and m.mname = #{mname}
+  </select> 
  
    <select id="selectAllMusic" resultMap="BaseResultMap">
     <!-- select m.mname,s.sname,m.duration from music m ,singer s where m.sid=s.sid -->
     select m.mid,m.type, m.count, m.mname,m.myear,s.sname,m.duration from music m ,singer s where m.sid=s.sid 
   </select>
+  
+  
 	<select id="selectlist" resultMap="BaseResultMap">
     select m.count, m.mname,s.sname,m.duration,m.mimg from music m ,singer s where m.sid=s.sid order by count desc
 

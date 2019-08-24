@@ -56,6 +56,11 @@
     from mv
   </select>
   
+   <select id="mvList" resultMap="BaseResultMap">
+    select t1.mvid,t1.mvname,t1.mlocation,t1.mimg,t1.sid,t1.mvreserve,t2.sname from mv t1,singer t2 where t1.sid =t2.sid
+  </select>
+  
+  
   <select id="selectMvCountBysid" parameterType="java.lang.Integer" resultType="java.lang.Integer">
     select count(*) MvCount from mv where mv.sid=#{mid,jdbcType=INTEGER}
 </select>

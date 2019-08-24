@@ -1,6 +1,6 @@
 package com.lanqiao.controller;
 import java.io.File;
-
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
@@ -137,7 +137,7 @@ public class AdminController {
 	      /*  int intLen = audioHeader.getTrackLength(); 单位是秒*/
 	        String duration = audioHeader.getTrackLengthAsString();
 	        music.setDuration(duration);
-	        music.setLocation("song/"+file.getOriginalFilename());
+	        music.setLocation("http://localhost:8086/song/"+file.getOriginalFilename());
 			/*System.out.println("音乐长度" + length);*/
 		/*	music.setMyear(new Date());*/
 	        
@@ -172,23 +172,46 @@ public class AdminController {
 	 * @return  
 	 */
 	@PutMapping("/alterMusic")
-	public List<Music> alterMusic(@RequestParam("file")
+	public String alterMusic(@RequestParam("file")
 	MultipartFile file, Music music ,@RequestParam(value="myear1") String myear1){
-			System.out.println("文件");
-			System.out.println(myear1+  "  myear");
-			System.out.println("musicadd ssd " + music+file.getOriginalFilename());
+			/*try {
+				System.out.println(myear1+  "  myear");
+				System.out.println("musicadd ssd " + music+file.getOriginalFilename());
+				music.setLocation("/song/"+music+file.getOriginalFilename());
+				 Date date = new SimpleDateFormat("yyyy-MM-dd").parse(myear1);
+				music.setMyear(date);
+				adminService.alterMusic(music);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		
+		
+		return null;*/
+		try {
+			File ff =new File("D:/music/song/"+file.getOriginalFilename());
+			file.transferTo(ff);
+			
+			MP3File mp3File = (MP3File) AudioFileIO.read(ff);
+	        MP3AudioHeader audioHeader = (MP3AudioHeader) mp3File.getAudioHeader();
+
+	        String duration = audioHeader.getTrackLengthAsString();
+	        music.setDuration(duration);
+	        music.setLocation("http://localhost:8086/song/"+file.getOriginalFilename());
+			
+	        Date date =new SimpleDateFormat("yyyy-MM-dd").parse(myear1);
+	        
+	        music.setMyear(date);
+			System.out.println(music);
+			adminService.alterMusic(music);
+		} catch ( Exception e) {
+		
+			e.printStackTrace();
+		}
+		
+		return "success";
+		
+	}
 	
-		
-/*		adminService.updateByPrimaryKey(music);*/
-		return null;
-		
-		
-	}
-	@PutMapping("/updateMusic")
-	public String updateMusic(Music music){
-		System.out.println("没有文件" +music);
-		return null;
-	}
 	/****************************歌手管理*******************/
 	
 

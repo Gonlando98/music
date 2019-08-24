@@ -42,5 +42,9 @@ public interface MusicMapper {
 
 	List<Music> selectAllMusic();
 
+	int deleteMusicBySid(Integer sid);
+
+	List<Music> selectMusicByName(String mname);
+
 
 }
