@@ -79,4 +79,25 @@
     userstatus = #{userstatus,jdbcType=VARCHAR}
      where username = #{username,jdbcType=VARCHAR}
   </update>
+  
+   
+
+  <select id="loginAll" resultMap="BaseResultMap">
+    select  uid, username, password, email, createtime, usertype, userstatus
+    from user
+    where  
+    username = #{username,jdbcType=VARCHAR} 
+    and   password = #{password,jdbcType=VARCHAR}
+  </select>
+  
+  
+  <insert id="register" parameterType="com.lanqiao.model.User">
+    insert into user (uid, username, password, 
+      email, createtime, usertype, 
+      userstatus)
+    values (null, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+  #{email,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{usertype,jdbcType=VARCHAR}, 
+  #{userstatus,jdbcType=VARCHAR})
+  </insert>
+  
 </mapper>
