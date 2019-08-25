@@ -98,10 +98,10 @@
       select m.mid,m.type, m.count, m.mname,m.myear,s.sname,m.duration
  from music m ,singer s where m.sid=s.sid  and m.mname = #{mname}
   </select> 
- 
+<!--  查找所有歌 -->
    <select id="selectAllMusic" resultMap="BaseResultMap">
     <!-- select m.mname,s.sname,m.duration from music m ,singer s where m.sid=s.sid -->
-    select m.mid,m.type, m.count, m.mname,m.myear,s.sname,m.duration from music m ,singer s where m.sid=s.sid 
+    select m.mid,m.type, m.count, m.mname,m.myear,m.aid,s.sname,m.duration from music m ,singer s where m.sid=s.sid 
   </select>
   
   
