@@ -19,4 +19,11 @@ public interface UserMapper {
 	int updateStatus(User user);
 
 	List<User> selectUserByName(String username);
+	
+	//登陆注册用
+		User selectByUsername(String username);
+	    void updatestatus(User user);
+		
+		void  active(User user);
+		User login (User user);
 }

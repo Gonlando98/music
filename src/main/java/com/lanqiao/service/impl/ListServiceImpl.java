@@ -95,4 +95,14 @@ public class ListServiceImpl implements ListService {
 		return musicMapper.selectfalbum();
 	}
 
+	@Override
+	public List<Music> selectmusiclist(String mreserve2) {
+		// TODO Auto-generated method stub
+		return musicMapper.selectmusiclist(mreserve2);
+	}
+	
+
+
+
+
 }

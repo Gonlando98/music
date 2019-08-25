@@ -136,4 +136,9 @@
     select mid, mname, sid, count, type, myear, mimg, location, aid, mvid, duration, 
     state, discuss, mreserve1, mreserve2, mreserve3 musicCount from music where music.sid=#{mid,jdbcType=INTEGER}
   </select>
+  <select id="selectmusiclist" resultMap="BaseResultMap" parameterType="java.lang.String">
+     select m.mid,m.count,m.myear, m.mname,s.sname,m.duration,m.mimg,m.mreserve2 from music m ,singer s 
+	where m.sid=s.sid and m.mreserve2 =#{mreserve2 ,jdbcType=VARCHAR}
+
+  </select>
 </mapper>

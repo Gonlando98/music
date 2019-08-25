@@ -37,5 +37,6 @@ public interface ListService {
 
 		List<Album> selectfalbum();
 	    
+		List<Music> selectmusiclist(String mreserve2);
 	    
 }

@@ -1,9 +1,18 @@
 package com.lanqiao.controller;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -55,11 +64,44 @@ public class ListController {
 	public List<Music> Fpub(Singer singer){
 		return service.selectfpub(singer.getType());
 	}
-	//专辑推荐
-	@GetMapping("/album")
-	public List<Album> album(){
-		return service.selectfalbum();
+	//歌单推荐
+	@GetMapping("/musiclist")
+	public List<Music> musiclist(String mreserve2){
+		System.out.println(mreserve2);
+		return service.selectmusiclist(mreserve2);
 	}
+	
+	@GetMapping("/download")
+	 
+	public void download(String mname,HttpServletResponse response){
+		try {
+			String path = "D:/music/song/"+mname+".mp3";
+			System.out.println(path);
+			File file = new File(path);
+			if(!file.exists()){
+				response.sendError(404, "下载错误");
+				return;
+			}
+			BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));
+			response.setContentType("multipart/form-data");
+			response.setHeader("Content-Disposition", "attachment;filename="+mname+".mp3");
+			
+			OutputStream out = response.getOutputStream();
+			byte [] buff = new byte[1024];
+			int len = -1;
+			while((len= bis.read(buff))!=-1){
+				out.write(buff,0,len);
+			}
+			bis.close();
+			out.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+
+	}
+
 	
 	
 
