@@ -31,6 +31,7 @@
       #{type,jdbcType=VARCHAR}, #{simg,jdbcType=VARCHAR}, #{detail,jdbcType=VARCHAR}, 
       #{sreserve,jdbcType=VARCHAR},null)
   </insert>
+  <!--   ces -->
   <update id="updateByPrimaryKey" parameterType="Singer">
     update singer
     set sname = #{sname,jdbcType=VARCHAR},

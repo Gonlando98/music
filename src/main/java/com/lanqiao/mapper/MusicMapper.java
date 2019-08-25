@@ -23,7 +23,7 @@ public interface MusicMapper {
     
     List<Music> selectMusicBysid(Integer sid);
 
-   
+  //ces
     List<Music> selectHotList();
 
 	List<Music> selectPopList();

@@ -61,13 +61,13 @@
     where a.mid = s.sid
   </select>
   
-  <!-- 搜索框 -->
+
  <select id="selectAlbumByName" parameterType="java.lang.String" resultMap="BaseResultMap">
      select aid, aname, aimg, mid, adetail,s.sname,a.areserve2
     from album a,singer s
     where a.mid = s.sid and aname = #{aname}
 
   </select>
-
+  <!-- 搜索框 -->
   
 </mapper>

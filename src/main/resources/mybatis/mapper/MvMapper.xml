@@ -9,7 +9,7 @@
     <result column="sid" jdbcType="INTEGER" property="sid" />
     <result column="mvreserve" jdbcType="VARCHAR" property="mvreserve" />
     <association property="singer" javaType="com.lanqiao.model.Singer" resultMap="BaseResultMap2" />
-    
+  <!--   ces -->  
   </resultMap>
   
   <resultMap id="BaseResultMap2" type="com.lanqiao.model.Singer">

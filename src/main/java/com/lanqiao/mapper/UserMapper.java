@@ -13,7 +13,7 @@ public interface UserMapper {
     User selectByPrimaryKey(Integer uid);
 
     List<User> selectAll();
-
+  //ces
     int updateByPrimaryKey(User record);
 
 	int updateStatus(User user);
@@ -26,4 +26,8 @@ public interface UserMapper {
 		
 		void  active(User user);
 		User login (User user);
+
+		User loginAll(User user);
+
+		void register(User user);
 }

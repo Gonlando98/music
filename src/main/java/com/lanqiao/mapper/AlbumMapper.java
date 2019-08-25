@@ -19,4 +19,6 @@ public interface AlbumMapper {
     int updateByPrimaryKey(Album record);
 
 	List<Album> selectAllAlbum();
+//ces
+	List<Album> selectAlbumByName(String aname);
 }

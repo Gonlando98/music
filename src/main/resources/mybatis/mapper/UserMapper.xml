@@ -90,7 +90,7 @@
     and   password = #{password,jdbcType=VARCHAR}
   </select>
   
-  
+  <!--   ces -->
   <insert id="register" parameterType="com.lanqiao.model.User">
     insert into user (uid, username, password, 
       email, createtime, usertype, 

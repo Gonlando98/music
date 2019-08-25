@@ -20,7 +20,7 @@
     <result column="mreserve3" jdbcType="VARCHAR" property="mreserve3" />
     <association property="singer" javaType="com.lanqiao.model.Singer" resultMap="BaseResultMap2" />
   </resultMap>
-  
+<!--   ces -->
   <resultMap id="BaseResultMap2" type="com.lanqiao.model.Singer">
     <id column="sid" jdbcType="INTEGER" property="sid" />
     <result column="sname" jdbcType="VARCHAR" property="sname" />

@@ -14,7 +14,7 @@ public interface SingerMapper {
     Singer selectByPrimaryKey(Integer sid);
 
     List<Singer> selectAll();
-
+  //ces
     int updateByPrimaryKey(Singer record);
     
     List<Singer> selectAllByFw(String fw);
