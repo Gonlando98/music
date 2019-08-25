@@ -27,22 +27,9 @@ public class Test {
 	@Autowired
 	private AdminAController  adminAController;
 	
-	@org.junit.Test
-	public void insert(){
-		List<User> list = a.selectUser();
-		/*System.out.println(list);*/
-		for (User user : list) {
-			System.out.println(user.getUsername());
-		}
-	}
 	
-	@org.junit.Test
-	public void select(){
-		List<Album> list = adminAController.selectAllAlbum();
-		for (Album album : list) {
-			System.out.println(album);
-		}
-	}
+	
+	
 	@org.junit.Test
 	public void select1(){
 		List<Music> list = adminAController.selectMusicByName("晴天");

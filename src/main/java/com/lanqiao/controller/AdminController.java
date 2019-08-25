@@ -45,11 +45,38 @@ public class AdminController {
 	private com.lanqiao.util.Pinyin4j py =new com.lanqiao.util.Pinyin4j();
 
 	@RequestMapping("/selectUser")
-	public List<User> selectUser(){
+	public  PageInfo selectUser(Integer cp){
+		if(cp==null){
+			cp=1;
+		}
+		
+		PageHelper.startPage(cp, Commons.pageSize);
+		List<User> list = adminService.selectAll();
+		for (User user : list) {
+			/*		System.out.println(user.getUsername());*/
+					if ("1".equals(user.getUsertype())) {
+						user.setUsertype("普通用户");
+					} else {
+						user.setUsertype("管理员");
+					}
+					if ("1".equals(user.getUserstatus())) {
+						user.setUserstatus("不可用");
+					} else {
+						user.setUserstatus("可用");
+					}
+				
+				
+					
+				}
+		PageInfo page = new PageInfo(list);
+		
+		return page;
+	}
+	/*public List<User> selectUser(){
 		List<User> list = adminService.selectAll();
 		
 		for (User user : list) {
-	/*		System.out.println(user.getUsername());*/
+
 			if ("1".equals(user.getUsertype())) {
 				user.setUsertype("普通用户");
 			} else {
@@ -60,21 +87,19 @@ public class AdminController {
 			} else {
 				user.setUserstatus("可用");
 			}
-			System.out.println(user.getCreatetime());
+		
+		
 			
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd ");
-			/*Date date = (Date)sdf.format(user.getCreatetime());*/
-		/*	user.setCreatetime(date);*/
 		}
 		return list;
-	} 
+	} */
 	/**
 	 * 
 	 * @param user
 	 * @return改变用户或者管理员的状态
 	 */
 	@RequestMapping("/updateStatus")
-	public List<User> updateStatus(User user){
+	public String updateStatus(User user){
 		System.out.println("sd" + user.getUserstatus());
 		if ("不可用".equals(user.getUserstatus())) {
 			user.setUserstatus("2");
@@ -83,7 +108,7 @@ public class AdminController {
 		}
 		int a= adminService.updateStatus(user);
 	
-		return 	adminController.selectUser();
+		return 	"success";
 		
 	}
 	
@@ -93,7 +118,7 @@ public class AdminController {
 	 * @return
 	 */
 	@GetMapping("/musicList")
-	public  PageInfo loadList(Music music,Integer cp){
+	public  PageInfo loadList(Integer cp){
 		if(cp==null){
 			cp=1;
 		}
@@ -238,7 +263,25 @@ public class AdminController {
 	 * @return
 	 */
 	@GetMapping("/singer")
-	public List<Singer> selectSinger(){
+	public  PageInfo selectSinger(Integer cp){
+		if(cp==null){
+			cp=1;
+		}
+		
+		PageHelper.startPage(cp, Commons.pageSize);
+		List<Singer> a = adminService.selectAllSinger();
+		for (Singer singer : a) {
+			if (singer.getDetail().length()>6) {
+				singer.setDetail(singer.getDetail().substring(0,5)+"......");
+			}
+			
+		}
+		PageInfo<Singer> page = new PageInfo<Singer>(a);
+		return page;
+		
+		
+	}
+	/*public List<Singer> selectSinger(){
 		List<Singer> a =  adminService.selectAllSinger();
 		for (Singer singer : a) {
 			if (singer.getDetail().length()>6) {
@@ -248,7 +291,7 @@ public class AdminController {
 		}
 		System.out.println(a);
 		return a;
-	}
+	}*/
 	/**
 	 * 增加singer
 	 * @param singer

@@ -40,8 +40,7 @@
   <update id="updateByPrimaryKey" parameterType="com.lanqiao.model.Mv">
     update mv
     set mvname = #{mvname,jdbcType=VARCHAR},
-      mlocation = #{mlocation,jdbcType=VARCHAR},
-      mimg = #{mimg,jdbcType=VARCHAR},
+     
       sid = #{sid,jdbcType=INTEGER},
       mvreserve = #{mvreserve,jdbcType=VARCHAR}
     where mvid = #{mvid,jdbcType=INTEGER}

@@ -13,12 +13,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.lanqiao.model.Album;
 import com.lanqiao.model.Music;
 import com.lanqiao.model.Mv;
 import com.lanqiao.model.Singer;
 import com.lanqiao.model.User;
 import com.lanqiao.service.AdminAService;
+import com.lanqiao.util.Commons;
 
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
 
@@ -32,13 +35,24 @@ public class AdminAController {
 	 * @return
 	 */
 	@GetMapping("/albumList")
-	public List<Album> selectAllAlbum(){
+	public  PageInfo albumList(Integer cp){
+		if(cp==null){
+			cp=1;
+		}
+		
+		PageHelper.startPage(cp, Commons.pageSize);
+		List<Album> list =  adminAService.selectAllAlbum();
+		PageInfo<Album> page = new PageInfo<Album>(list);
+		
+		return page;
+	}
+	/*public List<Album> selectAllAlbum(){
 		
 		List<Album> list = adminAService.selectAllAlbum();
 		System.out.println(list);
 		return list;
 		
-	}
+	}*/
 	 /**
 	  * 删除专辑
 	  * @param aid
@@ -89,12 +103,23 @@ public class AdminAController {
 	 * @return
 	 */
 	@GetMapping("/mvList")
-	public List<Mv> mvList(){
+	public  PageInfo mvList(Integer cp){
+		if(cp==null){
+			cp=1;
+		}
+		
+		PageHelper.startPage(cp, Commons.pageSize);
+		List<Mv> list =  adminAService.mvList();
+		PageInfo<Mv> page = new PageInfo<Mv>(list);
+		
+		return page;
+	}
+	/*public List<Mv> mvList(){
 		List<Mv> list = adminAService.mvList();
 		System.out.println(list);
 		return list;
 		
-	}
+	}*/
 /*	添加*/
 	@GetMapping("/selectMvById")
 	public Mv selectMvById(Integer mvid){
@@ -103,6 +128,7 @@ public class AdminAController {
 	}
 	@GetMapping("/updateMv")
 	public String updateMv(Mv mv){
+		System.out.println(mv);
 		adminAService.updateMv(mv);
 		
 		return null;
