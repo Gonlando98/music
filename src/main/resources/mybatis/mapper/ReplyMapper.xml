@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.music.dao.ReplyMapper">
-  <resultMap id="BaseResultMap" type="com.music.model.Reply">
+<mapper namespace="com.lanqiao.mapper.ReplyMapper">
+  <resultMap id="BaseResultMap" type="com.lanqiao.model.Reply">
     <id column="replyid" jdbcType="INTEGER" property="replyid" />
     <result column="replyuid" jdbcType="INTEGER" property="replyuid" />
     <result column="replycomid" jdbcType="INTEGER" property="replycomid" />
@@ -14,7 +14,7 @@
   
   
   <!-- 插入一条回复 -->
-  <insert id="insertReply" parameterType="com.music.model.Reply">
+  <insert id="insertReply" parameterType="com.lanqiao.model.Reply">
     insert into reply (replyid, replyuid, replycomid, 
       replyname, replycontent, replytime,replycomname,replypraise
       )
@@ -26,12 +26,11 @@
   </insert>
   
   
-  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from reply
     where replyid = #{replyid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.music.model.Reply">
+  <insert id="insert" parameterType="com.lanqiao.model.Reply">
     insert into reply (replyid, replyuid, replycomid, 
       replyname, replycontent, replytime
       )
@@ -39,7 +38,7 @@
       #{replyname,jdbcType=VARCHAR}, #{replycontent,jdbcType=VARCHAR}, #{replytime,jdbcType=VARCHAR}
       )
   </insert>
-  <update id="updateByPrimaryKey" parameterType="com.music.model.Reply">
+  <update id="updateByPrimaryKey" parameterType="com.lanqiao.model.Reply">
     update reply
     set replyuid = #{replyuid,jdbcType=INTEGER},
       replycomid = #{replycomid,jdbcType=INTEGER},

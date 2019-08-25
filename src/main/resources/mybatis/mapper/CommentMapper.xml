@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.music.dao.CommentMapper">
+<mapper namespace="com.lanqiao.mapper.CommentMapper">
 
 	<!-- 是回复表的映射 -->
-	<resultMap id="ReplyResultMap" type="com.music.model.Reply">
+	<resultMap id="ReplyResultMap" type="com.lanqiao.model.Reply">
 		<id column="replyid" jdbcType="INTEGER" property="replyid" />
 		<result column="replyuid" jdbcType="INTEGER" property="replyuid" />
 		<result column="replyname" jdbcType="VARCHAR" property="replyname" />
@@ -15,7 +15,7 @@
 	</resultMap>
 
 	<!-- 评论表的映射 -->
-	<resultMap id="BaseResultMap" type="com.music.model.Comment">
+	<resultMap id="BaseResultMap" type="com.lanqiao.model.Comment">
 		<id column="commentid" jdbcType="INTEGER" property="commentid" />
 		<result column="commentmid" jdbcType="INTEGER" property="commentmid" />
 		<result column="commentuid" jdbcType="INTEGER" property="commentuid" />
@@ -36,7 +36,7 @@
 	</select>
 
 	<!-- 插入一条回复 -->
-	<insert id="insertComment" parameterType="com.music.model.Comment">
+	<insert id="insertComment" parameterType="com.lanqiao.model.Comment">
 		insert into comment (commentid, commentmid, commentuid,
 		commentname, commenttime, commentcontent
 		)
