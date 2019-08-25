@@ -46,7 +46,7 @@
 		)
 	</insert>
 	
-	<!-- 更新赞的数量 -->
+	<!-- 更新评论赞的数量 -->
 	<update id="updateCommPraise" >
 		update comment
 		set commpraise = commpraise + #{count}
