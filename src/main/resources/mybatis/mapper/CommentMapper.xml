@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.music.dao.CommentMapper">
+
+	<!-- 是回复表的映射 -->
+	<resultMap id="ReplyResultMap" type="com.music.model.Reply">
+		<id column="replyid" jdbcType="INTEGER" property="replyid" />
+		<result column="replyuid" jdbcType="INTEGER" property="replyuid" />
+		<result column="replyname" jdbcType="VARCHAR" property="replyname" />
+		<result column="replycomid" jdbcType="INTEGER" property="replycomid" />
+		<result column="replycomname" jdbcType="VARCHAR" property="replycomname" />
+		<result column="replycontent" jdbcType="VARCHAR" property="replycontent" />
+		<result column="replytime" jdbcType="VARCHAR" property="replytime" />
+		<result column="replypraise" jdbcType="INTEGER" property="replypraise" />
+	</resultMap>
+
+	<!-- 评论表的映射 -->
+	<resultMap id="BaseResultMap" type="com.music.model.Comment">
+		<id column="commentid" jdbcType="INTEGER" property="commentid" />
+		<result column="commentmid" jdbcType="INTEGER" property="commentmid" />
+		<result column="commentuid" jdbcType="INTEGER" property="commentuid" />
+		<result column="commentname" jdbcType="VARCHAR" property="commentname" />
+		<result column="commenttime" jdbcType="VARCHAR" property="commenttime" />
+		<result column="commentcontent" jdbcType="VARCHAR" property="commentcontent" />
+		<result column="commpraise" jdbcType="INTEGER" property="commpraise" />
+		<collection property="replys" resultMap="ReplyResultMap"></collection>
+	</resultMap>
+
+
+	<!-- 查询相应歌曲下所有的回复和评论 -->
+	<select id="selectAllComment" resultMap="BaseResultMap">
+		select  t1.commentid,t1.commentmid,t1.commentuid,t1.commentname,t1.commenttime,t1.commentcontent,t1.commpraise,
+		 t2.replyid,t2.replyuid,t2.replyname, t2.replycomid,t2.replycomname, t2.replycontent,t2.replytime,t2.replypraise 
+		from (select * from comment  where commentmid = #{commentmid}) t1 left join reply t2 on  
+		t1.commentid = t2.replycomid  
+	</select>
+
+	<!-- 插入一条回复 -->
+	<insert id="insertComment" parameterType="com.music.model.Comment">
+		insert into comment (commentid, commentmid, commentuid,
+		commentname, commenttime, commentcontent
+		)
+		values (null, #{commentmid,jdbcType=INTEGER},
+		#{commentuid,jdbcType=INTEGER},#{commentname,jdbcType=VARCHAR}, 
+		#{commenttime,jdbcType=VARCHAR}, #{commentcontent,jdbcType=VARCHAR}
+		)
+	</insert>
+	
+	<!-- 更新赞的数量 -->
+	<update id="updateCommPraise" >
+		update comment
+		set commpraise = commpraise + #{count}
+		where commentid = #{commentid}
+	</update>
+	
+	<!-- 查询音乐的数量和播放总量 -->
+	<select id="totalCounts" resultType="java.util.HashMap">
+		select convert(count(*),char) tatal ,convert(sum(count),char) counts from music
+	</select>
+	
+	<!-- 查询总的用户数量 -->
+	<select id="totalUser" resultType="int">
+		select count(*) as totaluser from user
+	</select>
+	
+
+
+
+
+
+
+	
+
+</mapper>
