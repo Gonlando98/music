@@ -118,4 +118,10 @@ public class AdminServiceImpl implements AdminService{
 		musicMapper.updateByPrimaryKey(music);
 		
 	}
+	
+	@Override
+	public Music playMusic(String mname) {
+		// TODO Auto-generated method stub
+		return musicMapper.playMusic(mname);
+	}
 }

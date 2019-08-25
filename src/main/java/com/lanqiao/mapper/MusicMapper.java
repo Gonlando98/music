@@ -47,7 +47,8 @@ public interface MusicMapper {
 	List<Music> selectMusicByName(String mname);
 	
 	List<Music> selectmusiclist(String mreserve2);
-
+	
+	public Music playMusic(String mname);
 
 
 

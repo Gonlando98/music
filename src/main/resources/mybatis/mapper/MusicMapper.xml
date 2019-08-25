@@ -141,4 +141,8 @@
 	where m.sid=s.sid and m.mreserve2 =#{mreserve2 ,jdbcType=VARCHAR}
 
   </select>
+  
+  <select id="playMusic" resultMap="BaseResultMap">
+  	select mname,sname,mimg,location,mreserve1 from music m,singer s where m.sid=s.sid and m.mname=#{mname}
+  </select>
 </mapper>

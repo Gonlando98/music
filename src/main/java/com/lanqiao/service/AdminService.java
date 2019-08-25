@@ -37,5 +37,7 @@ public interface AdminService {
 	Singer selectSingerByPrimaryKey(Integer sid);
 
 	void alterMusic(Music music);
+	
+	Music playMusic(String mname);
 
 }
