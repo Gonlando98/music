@@ -16,8 +16,11 @@ import org.springframework.web.multipart.MultipartFile;
 import com.lanqiao.model.Album;
 import com.lanqiao.model.Music;
 import com.lanqiao.model.Mv;
+import com.lanqiao.model.Singer;
 import com.lanqiao.model.User;
 import com.lanqiao.service.AdminAService;
+
+import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
 
 @RestController
 @RequestMapping("/adminA")
@@ -92,6 +95,19 @@ public class AdminAController {
 		return list;
 		
 	}
+/*	添加*/
+	@GetMapping("/selectMvById")
+	public Mv selectMvById(Integer mvid){
+		return adminAService.selectMvById(mvid);
+		
+	}
+	@GetMapping("/updateMv")
+	public String updateMv(Mv mv){
+		adminAService.updateMv(mv);
+		
+		return null;
+		
+		}
 	/**
 	 * 删除mv
 	 * @param mvid
@@ -139,10 +155,38 @@ public class AdminAController {
 	public List<User> selectUserByName(String username){
 		return adminAService.selectUserByName(username);
 	}
-	
+	/**
+	 * 歌曲查找
+	 * @param mname
+	 * @return
+	 */
 	@GetMapping("/musicSelect")
 	public List<Music> selectMusicByName(String mname){
 		return adminAService.selectMusicByName(mname);
 	}
+	/**
+	 * 专辑
+	 * @param aname
+	 * @return
+	 */
+	@GetMapping("/albumSelect")
+	public List<Album> selectAlbumByName(String aname){
+		return adminAService.selectAlbumByName(aname);
+	}
+	/**
+	 * mv管理
+	 * @param mvname
+	 * @return
+	 */
+	@GetMapping("/mvSelect")
+	public List<Mv> selectMvByname(String mvname){
+		return adminAService.selectMvByname(mvname);
+		
+	}
 	
+	@GetMapping("/singerSelect")
+	public List<Singer> selectSinger(String sname){
+		return adminAService.selectSingerByName(sname);
+		
+	}
 }

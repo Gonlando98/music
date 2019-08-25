@@ -8,10 +8,12 @@ import org.springframework.stereotype.Service;
 import com.lanqiao.mapper.AlbumMapper;
 import com.lanqiao.mapper.MusicMapper;
 import com.lanqiao.mapper.MvMapper;
+import com.lanqiao.mapper.SingerMapper;
 import com.lanqiao.mapper.UserMapper;
 import com.lanqiao.model.Album;
 import com.lanqiao.model.Music;
 import com.lanqiao.model.Mv;
+import com.lanqiao.model.Singer;
 import com.lanqiao.model.User;
 import com.lanqiao.service.AdminAService;
 @Service
@@ -24,6 +26,9 @@ public class AdminAServiceImpl implements AdminAService {
 	private MvMapper mvMapper;
 	@Autowired
 	private MusicMapper musicMapper;
+	@Autowired
+	private SingerMapper singerMapper;
+	
 	@Override
 	public List<Album> selectAllAlbum() {
 		// TODO Auto-generated method stub
@@ -70,6 +75,31 @@ public class AdminAServiceImpl implements AdminAService {
 	public List<Music> selectMusicByName(String mname) {
 		// TODO Auto-generated method stub
 		return musicMapper.selectMusicByName(mname);
+	}
+	@Override
+	public List<Album> selectAlbumByName(String aname) {
+		// TODO Auto-generated method stub
+		return albumMapper.selectAlbumByName(aname);
+	}
+	@Override
+	public List<Mv> selectMvByname(String mvname) {
+		// TODO Auto-generated method stub
+		return mvMapper.selectMvByname(mvname);
+	}
+	@Override
+	public List<Singer> selectSingerByName(String sname) {
+		// TODO Auto-generated method stub
+		return singerMapper.selectSingerByName(sname);
+	}
+	@Override
+	public Mv selectMvById(Integer mvid) {
+		// TODO Auto-generated method stub
+		return mvMapper.selectByPrimaryKey(mvid);
+	}
+	@Override
+	public void updateMv(Mv mv) {
+		mvMapper.updateByPrimaryKey(mv);
+		
 	}
 
 }

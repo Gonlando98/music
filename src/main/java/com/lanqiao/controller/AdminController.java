@@ -24,10 +24,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.lanqiao.model.Music;
 import com.lanqiao.model.Singer;
 import com.lanqiao.model.User;
 import com.lanqiao.service.AdminService;
+import com.lanqiao.util.Commons;
 
 
 
@@ -90,9 +93,24 @@ public class AdminController {
 	 * @return
 	 */
 	@GetMapping("/musicList")
+	public  PageInfo loadList(Music music,Integer cp){
+		if(cp==null){
+			cp=1;
+		}
+		
+		PageHelper.startPage(cp, Commons.pageSize);
+		List<Music> musicAll = adminService.selectAllMusic();
+		PageInfo page = new PageInfo(musicAll);
+		
+		return page;
+	}
+
+	/*@GetMapping("/musicList")
 	public List<Music> loadList(){
 		return adminService.selectAllMusic();
-	}
+		
+		
+	}*/
 	
 	
 	/**

@@ -76,4 +76,12 @@
    select mvid,mvname,mlocation,mimg,mvreserve
 	from mv  where  mvreserve =#{mvreserve,jdbcType=VARCHAR}
   </select>
+    
+<!--    搜索框  -->
+   <select id="selectMvByname" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select mvid, mvname, mlocation, mimg, sid, mvreserve
+    from mv
+    where mvname = #{mvname}
+  </select>
+  
 </mapper>
