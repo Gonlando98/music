@@ -19,6 +19,7 @@
     <result column="mreserve2" jdbcType="VARCHAR" property="mreserve2" />
     <result column="mreserve3" jdbcType="VARCHAR" property="mreserve3" />
     <association property="singer" javaType="com.lanqiao.model.Singer" resultMap="BaseResultMap2" />
+     <association property="musiclist" javaType="com.lanqiao.model.Musiclist" resultMap="BaseResultMap3" />
   </resultMap>
 <!--   ces -->
   <resultMap id="BaseResultMap2" type="com.lanqiao.model.Singer">
@@ -31,6 +32,13 @@
     <result column="sreserve" jdbcType="VARCHAR" property="sreserve" />
     <result column="sreserve2" jdbcType="VARCHAR" property="sreserve2" />
     
+  </resultMap>
+  
+  <resultMap id="BaseResultMap3" type="com.lanqiao.model.Musiclist">
+    <id column="lid" jdbcType="INTEGER" property="lid" />
+    <result column="limg" jdbcType="VARCHAR" property="limg" />
+    <result column="lname" jdbcType="VARCHAR" property="lname" />
+    <result column="lintro" jdbcType="VARCHAR" property="lintro" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from music
@@ -140,6 +148,11 @@
      select m.mid,m.count,m.myear, m.mname,s.sname,m.duration,m.mimg,m.mreserve2 from music m ,singer s 
 	where m.sid=s.sid and m.mreserve2 =#{mreserve2 ,jdbcType=VARCHAR}
 
+  </select>
+  
+  <select id="selectmusiclist2" resultMap="BaseResultMap" parameterType="java.lang.String">
+     select distinct mreserve2, m.mreserve2,l.limg,l.lname,l.lintro  from music m ,musiclist l 
+	where m.mreserve2=l.lid  and m.mreserve2=#{mreserve2 ,jdbcType=VARCHAR}
   </select>
   
   <select id="playMusic" resultMap="BaseResultMap">

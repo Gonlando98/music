@@ -114,5 +114,11 @@ public class UserController {
 		System.out.println(session.getId()+"获取时");
 		return user;
 	}
+	@GetMapping("/checkuser")
+	public User checkUser(User user){
+		System.out.println("用户名检查");
+	User tuser=	userservice.selectByUsername(user.getUsername());
+	return tuser;
+	}
 
 }

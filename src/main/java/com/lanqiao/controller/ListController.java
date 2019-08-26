@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.lanqiao.model.Album;
 import com.lanqiao.model.Music;
 import com.lanqiao.model.Singer;
@@ -31,7 +33,19 @@ public class ListController {
 	//新歌榜
 	@GetMapping("/newlist")
 	public List<Music> newList(){
-		return service.selectlist();
+		PageHelper.startPage(1, 6);
+		List<Music> musics =service.selectlist();
+		System.out.println("yinyue"+musics);
+		PageInfo<Music> pageInfo = new PageInfo<>(musics);
+		System.out.println("fenye"+pageInfo);
+		List<Music> aa =pageInfo.getList();
+		System.out.println(aa);
+		/*for(Music a:aa){
+			System.out.println(a.getMname()+"  "+a.getDuration());
+		}*/
+		return pageInfo.getList();
+/*15111*/
+		/*return service.selectlist();*/
 	}
 
 	//热歌榜
@@ -70,6 +84,12 @@ public class ListController {
 		System.out.println(mreserve2);
 		return service.selectmusiclist(mreserve2);
 	}
+	//歌单推荐简介
+		@GetMapping("/musiclist2")
+		public List<Music> musiclist2(String mreserve2){
+			System.out.println(mreserve2);
+			return service.selectmusiclist2(mreserve2);
+		}
 	
 	@GetMapping("/download")
 	 
