@@ -42,6 +42,14 @@
     from user
     where uid = #{uid,jdbcType=INTEGER}
   </select>
+  
+<!--   条件查询 -->
+   <select id="selectUserByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select uid, username, password, email, createtime, usertype, userstatus
+    from user
+    where username = #{username}
+  </select> 
+  
   <select id="selectAll" resultMap="BaseResultMap">
     select uid, username, password, email, createtime, usertype, userstatus
     from user
@@ -52,4 +60,44 @@
       userstatus = #{userstatus,jdbcType=VARCHAR}
     where uid = #{uid,jdbcType=INTEGER}
   </update>
+  
+  <select id="selectByUsername" parameterType="string" resultMap="BaseResultMap">
+    select uid, username, password, email, createtime, usertype, userstatus
+    from user
+    where username = #{username,jdbcType=VARCHAR}
+  </select>
+  <select id="login" parameterType="com.lanqiao.model.User" resultMap="BaseResultMap">
+  	select uid, username, password, email, createtime, usertype, userstatus
+    from user
+    where username = #{username,jdbcType=VARCHAR} 
+    and password=#{password,jdbcType=VARCHAR}
+    
+
+  </select>
+  <update id="active" parameterType="com.lanqiao.model.User">
+    update user set
+    userstatus = #{userstatus,jdbcType=VARCHAR}
+     where username = #{username,jdbcType=VARCHAR}
+  </update>
+  
+   
+
+  <select id="loginAll" resultMap="BaseResultMap">
+    select  uid, username, password, email, createtime, usertype, userstatus
+    from user
+    where  
+    username = #{username,jdbcType=VARCHAR} 
+    and   password = #{password,jdbcType=VARCHAR}
+  </select>
+  
+  <!--   ces -->
+  <insert id="register" parameterType="com.lanqiao.model.User">
+    insert into user (uid, username, password, 
+      email, createtime, usertype, 
+      userstatus)
+    values (null, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+  #{email,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{usertype,jdbcType=VARCHAR}, 
+  #{userstatus,jdbcType=VARCHAR})
+  </insert>
+  
 </mapper>

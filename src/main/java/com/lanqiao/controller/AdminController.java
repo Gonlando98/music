@@ -1,6 +1,6 @@
 package com.lanqiao.controller;
 import java.io.File;
-
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
@@ -24,11 +24,17 @@ import org.springframework.web.multipart.MultipartFile;
 
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
 
+<<<<<<< HEAD
 import com.lanqiao.model.Album;
+=======
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+>>>>>>> branch 'master' of https://github.com/Gonlando98/music.git
 import com.lanqiao.model.Music;
 import com.lanqiao.model.Singer;
 import com.lanqiao.model.User;
 import com.lanqiao.service.AdminService;
+import com.lanqiao.util.Commons;
 
 
 
@@ -43,11 +49,38 @@ public class AdminController {
 	private com.lanqiao.util.Pinyin4j py =new com.lanqiao.util.Pinyin4j();
 
 	@RequestMapping("/selectUser")
-	public List<User> selectUser(){
+	public  PageInfo selectUser(Integer cp){
+		if(cp==null){
+			cp=1;
+		}
+		
+		PageHelper.startPage(cp, Commons.pageSize);
+		List<User> list = adminService.selectAll();
+		for (User user : list) {
+			/*		System.out.println(user.getUsername());*/
+					if ("1".equals(user.getUsertype())) {
+						user.setUsertype("普通用户");
+					} else {
+						user.setUsertype("管理员");
+					}
+					if ("1".equals(user.getUserstatus())) {
+						user.setUserstatus("不可用");
+					} else {
+						user.setUserstatus("可用");
+					}
+				
+				
+					
+				}
+		PageInfo page = new PageInfo(list);
+		
+		return page;
+	}
+	/*public List<User> selectUser(){
 		List<User> list = adminService.selectAll();
 		
 		for (User user : list) {
-	/*		System.out.println(user.getUsername());*/
+
 			if ("1".equals(user.getUsertype())) {
 				user.setUsertype("普通用户");
 			} else {
@@ -58,21 +91,19 @@ public class AdminController {
 			} else {
 				user.setUserstatus("可用");
 			}
-			System.out.println(user.getCreatetime());
+		
+		
 			
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd ");
-			/*Date date = (Date)sdf.format(user.getCreatetime());*/
-		/*	user.setCreatetime(date);*/
 		}
 		return list;
-	} 
+	} */
 	/**
 	 * 
 	 * @param user
 	 * @return改变用户或者管理员的状态
 	 */
 	@RequestMapping("/updateStatus")
-	public List<User> updateStatus(User user){
+	public String updateStatus(User user){
 		System.out.println("sd" + user.getUserstatus());
 		if ("不可用".equals(user.getUserstatus())) {
 			user.setUserstatus("2");
@@ -81,7 +112,7 @@ public class AdminController {
 		}
 		int a= adminService.updateStatus(user);
 	
-		return 	adminController.selectUser();
+		return 	"success";
 		
 	}
 	
@@ -91,9 +122,24 @@ public class AdminController {
 	 * @return
 	 */
 	@GetMapping("/musicList")
+	public  PageInfo loadList(Integer cp){
+		if(cp==null){
+			cp=1;
+		}
+		
+		PageHelper.startPage(cp, Commons.pageSize);
+		List<Music> musicAll = adminService.selectAllMusic();
+		PageInfo page = new PageInfo(musicAll);
+		
+		return page;
+	}
+
+	/*@GetMapping("/musicList")
 	public List<Music> loadList(){
 		return adminService.selectAllMusic();
-	}
+		
+		
+	}*/
 	
 	
 	/**
@@ -138,7 +184,7 @@ public class AdminController {
 	      /*  int intLen = audioHeader.getTrackLength(); 单位是秒*/
 	        String duration = audioHeader.getTrackLengthAsString();
 	        music.setDuration(duration);
-	        music.setLocation("song/"+file.getOriginalFilename());
+	        music.setLocation("http://localhost:8086/song/"+file.getOriginalFilename());
 			/*System.out.println("音乐长度" + length);*/
 		/*	music.setMyear(new Date());*/
 	        
@@ -173,23 +219,46 @@ public class AdminController {
 	 * @return  
 	 */
 	@PutMapping("/alterMusic")
-	public List<Music> alterMusic(@RequestParam("file")
+	public String alterMusic(@RequestParam("file")
 	MultipartFile file, Music music ,@RequestParam(value="myear1") String myear1){
-			System.out.println("文件");
-			System.out.println(myear1+  "  myear");
-			System.out.println("musicadd ssd " + music+file.getOriginalFilename());
+			/*try {
+				System.out.println(myear1+  "  myear");
+				System.out.println("musicadd ssd " + music+file.getOriginalFilename());
+				music.setLocation("/song/"+music+file.getOriginalFilename());
+				 Date date = new SimpleDateFormat("yyyy-MM-dd").parse(myear1);
+				music.setMyear(date);
+				adminService.alterMusic(music);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		
+		
+		return null;*/
+		try {
+			File ff =new File("D:/music/song/"+file.getOriginalFilename());
+			file.transferTo(ff);
+			
+			MP3File mp3File = (MP3File) AudioFileIO.read(ff);
+	        MP3AudioHeader audioHeader = (MP3AudioHeader) mp3File.getAudioHeader();
+
+	        String duration = audioHeader.getTrackLengthAsString();
+	        music.setDuration(duration);
+	        music.setLocation("http://localhost:8086/song/"+file.getOriginalFilename());
+			
+	        Date date =new SimpleDateFormat("yyyy-MM-dd").parse(myear1);
+	        
+	        music.setMyear(date);
+			System.out.println(music);
+			adminService.alterMusic(music);
+		} catch ( Exception e) {
+		
+			e.printStackTrace();
+		}
+		
+		return "success";
+		
+	}
 	
-		
-/*		adminService.updateByPrimaryKey(music);*/
-		return null;
-		
-		
-	}
-	@PutMapping("/updateMusic")
-	public String updateMusic(Music music){
-		System.out.println("没有文件" +music);
-		return null;
-	}
 	/****************************歌手管理*******************/
 	
 
@@ -198,7 +267,25 @@ public class AdminController {
 	 * @return
 	 */
 	@GetMapping("/singer")
-	public List<Singer> selectSinger(){
+	public  PageInfo selectSinger(Integer cp){
+		if(cp==null){
+			cp=1;
+		}
+		
+		PageHelper.startPage(cp, Commons.pageSize);
+		List<Singer> a = adminService.selectAllSinger();
+		for (Singer singer : a) {
+			if (singer.getDetail().length()>6) {
+				singer.setDetail(singer.getDetail().substring(0,5)+"......");
+			}
+			
+		}
+		PageInfo<Singer> page = new PageInfo<Singer>(a);
+		return page;
+		
+		
+	}
+	/*public List<Singer> selectSinger(){
 		List<Singer> a =  adminService.selectAllSinger();
 		for (Singer singer : a) {
 			if (singer.getDetail().length()>6) {
@@ -208,7 +295,7 @@ public class AdminController {
 		}
 		System.out.println(a);
 		return a;
-	}
+	}*/
 	/**
 	 * 增加singer
 	 * @param singer

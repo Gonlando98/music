@@ -24,9 +24,11 @@ public class AllowOriginFilter implements Filter {
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
 			throws IOException, ServletException {
 		HttpServletResponse response = (HttpServletResponse)res;
-		response.setHeader("Access-Control-Allow-Origin", "*");
+		response.setContentType("text/html; charset=utf-8");
+		response.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
 		response.setHeader("Access-Control-Allow-Methods", "POST,GET,PUT,DELETE");
 		response.setHeader("Access-Control-Max-Age", "3600");
+		response.setHeader("Access-Control-Allow-Credentials","true");
 		response.setHeader("Access-Control-Allow-Headers", "Content-Type,XFILENAME,XFILECATEGORY,XFILESIZE");
 		/*System.out.println("+++++++++++++++++过滤器被使用+++++++++++++++++");*/
 		chain.doFilter(req,response);

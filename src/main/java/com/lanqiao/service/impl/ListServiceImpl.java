@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.lanqiao.mapper.MusicMapper;
 import com.lanqiao.model.Album;
 import com.lanqiao.model.Music;
+import com.lanqiao.model.Musiclist;
 import com.lanqiao.service.ListService;
 
 @Service
@@ -94,5 +95,21 @@ public class ListServiceImpl implements ListService {
 		// TODO Auto-generated method stub
 		return musicMapper.selectfalbum();
 	}
+
+	@Override
+	public List<Music> selectmusiclist(String mreserve2) {
+		// TODO Auto-generated method stub
+		return musicMapper.selectmusiclist(mreserve2);
+	}
+
+	@Override
+	public List<Music> selectmusiclist2(String mreserve2) {
+		// TODO Auto-generated method stub
+		return musicMapper.selectmusiclist2(mreserve2);
+	}
+	
+
+
+
 
 }

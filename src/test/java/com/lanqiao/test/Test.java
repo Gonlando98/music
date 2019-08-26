@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.lanqiao.controller.AdminController;
 import com.lanqiao.mapper.UserMapper;
 import com.lanqiao.model.Album;
+import com.lanqiao.model.Music;
 import com.lanqiao.model.User;
 
 
@@ -25,16 +26,15 @@ public class Test {
 	@Autowired
 	private AdminController  adminAController;
 	
+	
+	
+
 	@org.junit.Test
-	public void insert(){
-		List<User> list = a.selectUser();
-		/*System.out.println(list);*/
-		for (User user : list) {
-			System.out.println(user.getUsername());
-		}
+	public void select1(){
+		List<Music> list = adminAController.selectMusicByName("晴天");
+		System.out.println(list);
 	}
-	
-	
+
 	
 	/*@org.junit.Test
 	public void updateStatus(){

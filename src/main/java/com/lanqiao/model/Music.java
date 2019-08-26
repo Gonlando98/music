@@ -30,8 +30,20 @@ public class Music {
     private String discuss;
     
     private Singer singer;
+    
+    private Musiclist musiclist;
+    
+    
 
     
+
+	public Musiclist getMusiclist() {
+		return musiclist;
+	}
+
+	public void setMusiclist(Musiclist musiclist) {
+		this.musiclist = musiclist;
+	}
 
 	public Singer getSinger() {
 		return singer;

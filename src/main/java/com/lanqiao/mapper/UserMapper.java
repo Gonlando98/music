@@ -13,8 +13,21 @@ public interface UserMapper {
     User selectByPrimaryKey(Integer uid);
 
     List<User> selectAll();
-
+  //ces
     int updateByPrimaryKey(User record);
 
 	int updateStatus(User user);
+
+	List<User> selectUserByName(String username);
+	
+	//登陆注册用
+		User selectByUsername(String username);
+	    void updatestatus(User user);
+		
+		void  active(User user);
+		User login (User user);
+
+		User loginAll(User user);
+
+		void register(User user);
 }

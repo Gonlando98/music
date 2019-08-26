@@ -103,7 +103,7 @@ public class AdminServiceImpl implements AdminService{
 
 	@Override
 	public void deleteMusic(Integer sid) {
-		// TODO Auto-generated method stub
+		musicMapper.deleteMusicBySid(sid);
 		
 	}
 
@@ -111,5 +111,17 @@ public class AdminServiceImpl implements AdminService{
 	public Singer selectSingerByPrimaryKey(Integer sid) {
 		// TODO Auto-generated method stub
 		return singerMapper.selectByPrimaryKey(sid);
+	}
+
+	@Override
+	public void alterMusic(Music music) {
+		musicMapper.updateByPrimaryKey(music);
+		
+	}
+	
+	@Override
+	public Music playMusic(String mname) {
+		// TODO Auto-generated method stub
+		return musicMapper.playMusic(mname);
 	}
 }

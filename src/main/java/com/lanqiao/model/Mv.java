@@ -72,4 +72,10 @@ public class Mv {
     public void setMvreserve(String mvreserve) {
         this.mvreserve = mvreserve == null ? null : mvreserve.trim();
     }
+
+	@Override
+	public String toString() {
+		return "Mv [mvid=" + mvid + ", mvname=" + mvname + ", mlocation=" + mlocation + ", mimg=" + mimg + ", sid="
+				+ sid + ", mvreserve=" + mvreserve + ", singer=" + singer + "]";
+	}
 }

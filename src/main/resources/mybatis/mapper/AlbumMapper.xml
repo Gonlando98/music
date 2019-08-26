@@ -26,10 +26,10 @@
     where aid = #{aid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.lanqiao.model.Album">
-    insert into album (aid, aname, aimg, 
+    insert into album ( aname, aimg, 
       mid, adetail, areserve2
       )
-    values (#{aid,jdbcType=INTEGER}, #{aname,jdbcType=VARCHAR}, #{aimg,jdbcType=VARCHAR}, 
+    values ( #{aname,jdbcType=VARCHAR}, #{aimg,jdbcType=VARCHAR}, 
       #{mid,jdbcType=INTEGER}, #{adetail,jdbcType=VARCHAR}, #{areserve2,jdbcType=VARCHAR}
       )
   </insert>
@@ -56,11 +56,12 @@
      select count(*) albumCount from album where mid=#{sid,jdbcType=INTEGER}
  </select>
    <select id="selectAllAlbum" resultMap="BaseResultMap">
-    select aid, aname, aimg, mid, adetail,s.sname
+    select aid, aname, aimg, mid, adetail,s.sname,a.areserve2
     from album a,singer s
     where a.mid = s.sid
   </select>
   
+
   <select id="selectAlbumByMid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
      select aid, aname, aimg, mid, adetail, areserve2 from album where mid=#{mid,jdbcType=INTEGER}
  </select>
@@ -68,5 +69,15 @@
  <select id="selectSingerByAid" parameterType="java.lang.Integer" resultMap="BaseResultMap2">
      select sid, sname, sex, type, simg, detail, sreserve, sreserve2 from singer where sid=(select mid from album where aid=#{aid,jdbcType=INTEGER})
  </select>
- 
+
+
+ <select id="selectAlbumByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+     select aid, aname, aimg, mid, adetail,s.sname,a.areserve2
+    from album a,singer s
+    where a.mid = s.sid and aname = #{aname}
+
+  </select>
+  <!-- 搜索框 -->
+  
+
 </mapper>

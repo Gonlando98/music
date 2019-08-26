@@ -31,6 +31,7 @@
       #{type,jdbcType=VARCHAR}, #{simg,jdbcType=VARCHAR}, #{detail,jdbcType=VARCHAR}, 
       #{sreserve,jdbcType=VARCHAR},null)
   </insert>
+  <!--   ces -->
   <update id="updateByPrimaryKey" parameterType="Singer">
     update singer
     set sname = #{sname,jdbcType=VARCHAR},
@@ -73,7 +74,17 @@
     select sid, sname, sex, type, simg, detail, sreserve, sreserve2
     from singer
     where sid = #{sid,jdbcType=INTEGER}
+
   </select>
+<!--   搜索框 -->
+ <select id="selectSingerByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select sid, sname, sex, type, simg, detail, sreserve, sreserve2
+    from singer
+    where sname = #{sname}
+
+  </select>
+  
+  
   <select id="selectAll" resultMap="BaseResultMap">
     select sid, sname, sex, type, simg, detail, sreserve, sreserve2
     from singer
@@ -89,4 +100,16 @@
     from singer
     where type=#{a,jdbcType=VARCHAR} and sex=#{b,jdbcType=VARCHAR}
   </select>
+  
+  <!--后代增加歌手写的代码  -->
+  <insert id="addSinger" parameterType="com.lanqiao.model.Singer">
+    insert into singer (sid, sname, sex, 
+      type, simg, detail, 
+      sreserve, sreserve2)
+    values (null, #{sname,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{simg,jdbcType=VARCHAR}, #{detail,jdbcType=VARCHAR}, 
+      #{sreserve,jdbcType=VARCHAR},null)
+  </insert>
+  
+  
 </mapper>

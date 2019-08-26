@@ -21,8 +21,12 @@ public interface AlbumMapper {
     int updateByPrimaryKey(Album record);
 
 	List<Album> selectAllAlbum();
-	
+
 	List<Album> selectAlbumByMid(Integer mid);
 	
 	Singer selectSingerByAid(Integer aid);
+
+//ces
+	List<Album> selectAlbumByName(String aname);
+
 }

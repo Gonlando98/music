@@ -23,8 +23,12 @@ public interface MusicMapper {
     
     List<Music> selectMusicBysid(Integer sid);
 
+
     List<Music> selectMusicByAid(Integer aid);
-   
+
+
+  //ces
+
     List<Music> selectHotList();
 
 	List<Music> selectPopList();
@@ -42,6 +46,15 @@ public interface MusicMapper {
 	List<Album> selectfalbum();
 
 	List<Music> selectAllMusic();
+
+	int deleteMusicBySid(Integer sid);
+
+	List<Music> selectMusicByName(String mname);
+	
+	List<Music> selectmusiclist(String mreserve2);
+	
+	public Music playMusic(String mname);
+
 
 
 }

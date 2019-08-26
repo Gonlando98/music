@@ -19,7 +19,7 @@ public interface MvMapper {
 
     int updateByPrimaryKey(Mv record);
     
-
+  //ces
     int selectMvCountBysid(Integer sid);
 
     List<Mv> selectAllmv();
@@ -27,5 +27,9 @@ public interface MvMapper {
 	List<Mv> selectLocalmv(String type);
 
 	List<Mv> selectStypemv(String type);
+
+	List<Mv> mvList();
+
+	List<Mv> selectMvByname(String mvname);
 
 }
