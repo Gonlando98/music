@@ -33,17 +33,17 @@ public class ListController {
 	//新歌榜
 	@GetMapping("/newlist")
 	public List<Music> newList(){
-		PageHelper.startPage(1, 6);
-		List<Music> musics =service.selectlist();
-		System.out.println("yinyue"+musics);
-		PageInfo<Music> pageInfo = new PageInfo<>(musics);
-		System.out.println("fenye"+pageInfo);
-		List<Music> aa =pageInfo.getList();
-		System.out.println(aa);
+//		PageHelper.startPage(1, 6);
+//		List<Music> musics =service.selectlist();
+//		System.out.println("yinyue"+musics);
+//		PageInfo<Music> pageInfo = new PageInfo<>(musics);
+//		System.out.println("fenye"+pageInfo);
+//		List<Music> aa =pageInfo.getList();
+//		System.out.println(aa);
 		/*for(Music a:aa){
 			System.out.println(a.getMname()+"  "+a.getDuration());
 		}*/
-		return pageInfo.getList();
+		return service.selectlist();
 /*15111*/
 		/*return service.selectlist();*/
 	}

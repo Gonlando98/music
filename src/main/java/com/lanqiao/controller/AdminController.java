@@ -24,12 +24,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
 
-<<<<<<< HEAD
 import com.lanqiao.model.Album;
-=======
+
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
->>>>>>> branch 'master' of https://github.com/Gonlando98/music.git
 import com.lanqiao.model.Music;
 import com.lanqiao.model.Singer;
 import com.lanqiao.model.User;
