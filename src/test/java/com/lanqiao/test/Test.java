@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.lanqiao.controller.AdminAController;
 import com.lanqiao.controller.AdminController;
 import com.lanqiao.mapper.UserMapper;
 import com.lanqiao.model.Album;
@@ -24,7 +23,7 @@ public class Test {
 	@Autowired
 	private AdminController a ;
 	@Autowired
-	private AdminAController  adminAController;
+	private AdminController  adminAController;
 	
 	@org.junit.Test
 	public void insert(){
@@ -35,13 +34,7 @@ public class Test {
 		}
 	}
 	
-	@org.junit.Test
-	public void select(){
-		List<Album> list = adminAController.selectAllAlbum();
-		for (Album album : list) {
-			System.out.println(album);
-		}
-	}
+	
 	
 	/*@org.junit.Test
 	public void updateStatus(){

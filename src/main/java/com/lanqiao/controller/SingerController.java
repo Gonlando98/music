@@ -33,6 +33,7 @@ public class SingerController {
 //	查询所有歌手
 	@GetMapping("/singer")
 	public List<Singer> loadSinger(){
+		System.out.println(service1.selectAll());
 		return service1.selectAll();
 	}
 //	根据首字母查询歌手

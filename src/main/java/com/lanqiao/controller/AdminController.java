@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
 
+import com.lanqiao.model.Album;
 import com.lanqiao.model.Music;
 import com.lanqiao.model.Singer;
 import com.lanqiao.model.User;
@@ -273,6 +274,7 @@ public class AdminController {
 		adminService.deleteMusic(sid);
 		return "success";
 	}
+	
 	
 	
 }
