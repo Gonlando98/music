@@ -56,6 +56,6 @@ public interface MusicMapper {
 	
 	public Music playMusic(String mname);
 
-
+	public Music playMusicid(Integer mid);
 
 }

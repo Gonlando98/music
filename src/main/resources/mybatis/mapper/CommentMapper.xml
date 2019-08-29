@@ -63,7 +63,17 @@
 		select count(*) as totaluser from user
 	</select>
 	
+	
 
+	<!-- 查询MV数量 -->
+	<select id="totalMv" resultType="int">
+		select count(*) as totalMv from mv
+	</select>
+	
+	<!-- 查询歌单数量 -->
+	<select id="totalAlbum" resultType="int">
+		select count(*) as totalAlbum from album
+	</select>
 
 
 

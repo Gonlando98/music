@@ -83,4 +83,8 @@
     where mvname = #{mvname}
   </select>
   
+  <select id="playMv" resultMap="BaseResultMap" parameterType="com.lanqiao.model.Mv">
+  	select mlocation from mv where mvname=#{mvname}
+  </select>
+  
 </mapper>

@@ -44,7 +44,7 @@ public class CommentController {
 		System.out.println("replyname  :"+reply.getReplyname());
 		System.out.println("replycontent  :"+reply.getReplycontent());
 		System.out.println("replytime  :"+reply.getReplytime());
-		//commentService.insertReply(reply);
+		commentService.insertReply(reply);
 	}
 	
 	//根据评论的id,commentid更新赞的数量
@@ -80,4 +80,20 @@ public class CommentController {
 		System.out.println("用户总数： "+commentService.totalUser());
 		return commentService.totalUser();
 	}
+	
+	//获取到MV的总数
+		@RequestMapping("/totalMv")
+		public Integer totalMv(){
+			System.out.println("MV总数： "+commentService.totalMv());
+			return commentService.totalMv();
+		}
+		
+		//获取到歌单总数
+		@RequestMapping("/totalAlbum")
+		public Integer totalAlbum(){
+			//commentService.totalAlbum();
+			System.out.println("用户总数： "+commentService.totalAlbum());
+			return commentService.totalAlbum();
+		}
+
 }

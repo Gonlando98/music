@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lanqiao.mapper.MusicMapper;
+import com.lanqiao.mapper.MvMapper;
 import com.lanqiao.mapper.SingerMapper;
 import com.lanqiao.mapper.UserMapper;
 import com.lanqiao.model.Music;
+import com.lanqiao.model.Mv;
 import com.lanqiao.model.Singer;
 import com.lanqiao.model.User;
 import com.lanqiao.service.AdminService;
@@ -24,6 +26,9 @@ public class AdminServiceImpl implements AdminService{
 	
 	@Autowired
 	private SingerMapper singerMapper;
+	
+	@Autowired
+	private MvMapper mvMapper;
 
 	@Override
 	public List<User> selectAll() {
@@ -123,5 +128,17 @@ public class AdminServiceImpl implements AdminService{
 	public Music playMusic(String mname) {
 		// TODO Auto-generated method stub
 		return musicMapper.playMusic(mname);
+	}
+	
+	@Override
+	public Mv playMV(String mvname) {
+		// TODO Auto-generated method stub
+		return mvMapper.playMv(mvname);
+	}
+
+	@Override
+	public Music playMusicid(Integer mid) {
+		// TODO Auto-generated method stub
+		return musicMapper.playMusicid(mid);
 	}
 }

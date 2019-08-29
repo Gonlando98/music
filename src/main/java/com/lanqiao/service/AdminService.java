@@ -3,6 +3,7 @@ package com.lanqiao.service;
 import java.util.List;
 
 import com.lanqiao.model.Music;
+import com.lanqiao.model.Mv;
 import com.lanqiao.model.Singer;
 import com.lanqiao.model.User;
 
@@ -39,5 +40,9 @@ public interface AdminService {
 	void alterMusic(Music music);
 	
 	Music playMusic(String mname);
+	
+	Mv playMV(String mvname);
+	
+	Music playMusicid(Integer mid);
 
 }

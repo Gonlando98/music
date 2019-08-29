@@ -359,6 +359,10 @@ public class AdminController {
 		adminService.deleteMusic(sid);
 		return "success";
 	}
+	public List<Music> selectMusicByName(String string) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 	

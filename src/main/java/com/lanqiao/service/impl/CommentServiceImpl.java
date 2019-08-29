@@ -33,7 +33,7 @@ public class CommentServiceImpl implements CommentService{
 	//插入一条评论
 	@Override
 	public void insert(Comment comment) {
-		commentMapper.insert(comment);
+		commentMapper.insertComment(comment);
 		
 	}
 	//插入一条评论的回复
@@ -58,6 +58,20 @@ public class CommentServiceImpl implements CommentService{
 	@Override
 	public Integer totalUser(){
 		return commentMapper.totalUser();
+	}
+	
+
+
+	//查询mv总数
+	@Override
+	public Integer totalMv() {
+		return commentMapper.totalMv();
+	}
+
+	//查询歌单总数
+	@Override
+	public Integer totalAlbum() {
+		return commentMapper.totalAlbum();
 	}
 	
 }

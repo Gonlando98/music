@@ -1,5 +1,6 @@
 package com.lanqiao.mapper;
 
+import com.lanqiao.model.Music;
 import com.lanqiao.model.Mv;
 import com.lanqiao.model.Singer;
 
@@ -31,5 +32,7 @@ public interface MvMapper {
 	List<Mv> mvList();
 
 	List<Mv> selectMvByname(String mvname);
+	
+	 Mv playMv(String mvname);
 
 }

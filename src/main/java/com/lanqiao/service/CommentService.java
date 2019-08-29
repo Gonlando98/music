@@ -24,4 +24,10 @@ public interface CommentService {
 		//查询用户总数
 		public Integer totalUser();
 		
+		//查询MV总量
+	  	public Integer totalMv();
+	  	
+	  	//查询歌单总量
+	  	public Integer totalAlbum();
+		
 }

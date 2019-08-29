@@ -14,7 +14,7 @@ import com.lanqiao.model.Comment;
 public interface CommentMapper {
 
     //插入一条记录
-    int insert(Comment record);
+    public int insertComment(Comment record);
 
     //根据音乐的id查询该音乐下的所有评论
     public List<Comment> selectAllComment(Integer commentmid);
@@ -27,6 +27,10 @@ public interface CommentMapper {
   	//查询用户总量
   	public Integer totalUser();
   	
+  //查询MV总量
+  	public Integer totalMv();
   	
+  	//查询歌单总量
+  	public Integer totalAlbum();
   
 }
